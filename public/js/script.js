@@ -1,37 +1,43 @@
 // public/js/script.js
 
-$(
-    () => {
-        const get2digits = num => {
-            return `0${num}`.slice(-2);
-        }
-        
-        const getDate = dateObj => {
-            if (dateObj instanceof Date)
-                return `${dateObj.getFullYear()} - ${get2digits(dateObj.getMonth()+1)}
-                 - ${get2digits(dateObj.getDate())}`;
-        }
+$( () => {
+  const get2digits = (num) => {
+    return `0${num}`.slice(-2);
+  }
 
-        const getTime = dateObj => {
-            if (dateObj instanceof Date)
-                return `${get2digits(dateObj.getHours())} : ${get2digits(dateObj.getMinutes())}
-                 : ${get2digits(dateObj.getSeconds())}`;
-        }
+  const getDate = (dateObj) => {
+    if(dateObj instanceof Date)
+      return `${dateObj.getFullYear()}-${get2digits(dateObj.getMonth()+1)}-${get2digits(dateObj.getDate())}`;
+  }
 
-        const convertDate = () => {
-            $('[data-date]').each( (index, element) => {
-                let dateString = $(element).data('date');
-                if (dataString) {
-                    let date = new Date(dataString);
-                    $(element).html(`${getDate(date)} ${getTime(date)}`);
-                }
-            });
-        }
+  const getTime = (dateObj) => {
+    if(dateObj instanceof Date)
+      return `${get2digits(dateObj.getHours())}:${get2digits(dateObj.getMinutes())}:${get2digits(dateObj.getSeconds())}`;
+  }
 
-        convertDate();
-        convertDateTime();
-    }
-);
+  const convertDate = () => {
+    $('[data-date]').each((index,element) => {
+      let dateString = $(element).data('date');
+      if(dateString){
+        let date = new Date(dateString);
+        $(element).html(getDate(date));
+      }
+    });
+  }
+
+  const convertDateTime = () => {
+    $('[data-date-time]').each((index,element) => {
+      let dateString = $(element).data('date-time');
+      if(dateString){
+        let date = new Date(dateString);
+        $(element).html(`${getDate(date)} ${getTime(date)}`);
+      }
+    });
+  }
+
+  convertDate();
+  convertDateTime();
+});
 
 
 
